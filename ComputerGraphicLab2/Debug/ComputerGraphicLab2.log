@@ -1,0 +1,31 @@
+﻿Build started 11/12/2015 11:55:09 AM.
+     1>Project "C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\ComputerGraphicLab2\ComputerGraphicLab2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\\glew\include" /I"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\\glfw\include" /I"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\\Common\Source" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Assignment2.cpp
+         Assignment2.cpp
+     1>c:\users\zhiyuan\downloads\computergraphiclab2 (2)\computergraphiclab2\source\assignment2.cpp(166): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\zhiyuan\downloads\computergraphiclab2 (2)\computergraphiclab2\source\assignment2.cpp(174): warning C4244: '+=' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\zhiyuan\downloads\computergraphiclab2 (2)\computergraphiclab2\source\assignment2.cpp(286): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\zhiyuan\downloads\computergraphiclab2 (2)\computergraphiclab2\source\assignment2.cpp(296): warning C4305: 'argument' : truncation from 'double' to 'float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\Debug\ComputerGraphicLab2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\\glew\lib" /LIBPATH:"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\\glfw\lib-msvc120" /LIBPATH:"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\Debug" glew32.lib glfw3.lib opengl32.lib winmm.lib Common.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\Debug\ComputerGraphicLab2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\Debug\ComputerGraphicLab2.lib" /MACHINE:X86 Debug\Application.obj
+         Debug\Assignment2.obj
+         Debug\Camera.obj
+         Debug\Camera2.obj
+         Debug\main.obj
+         Debug\Mesh.obj
+         Debug\MeshBuilder.obj
+         Debug\Scene1.obj
+         Debug\Scene2.obj
+         Debug\Scene3.obj
+         Debug\Scene4.obj
+         Debug\SceneLight.obj
+         Debug\SceneLight2.obj
+         Debug\shader.obj
+         Debug\Utility.obj
+         ComputerGraphicLab2.vcxproj -> C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\Debug\ComputerGraphicLab2.exe
+     1>Done Building Project "C:\Users\Zhiyuan\Downloads\ComputerGraphicLab2 (2)\ComputerGraphicLab2\ComputerGraphicLab2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.26
