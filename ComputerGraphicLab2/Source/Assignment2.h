@@ -19,6 +19,11 @@ class Assignment2 : public Scene
 		GEO_PINKBEANBODY,
 		GEO_PINKBEANLOWERBODY,
 		GEO_PINKBEANLEGS,
+		GEO_PINKBEANBELLY,
+		GEO_PINKBEANARMS, 
+		GE0_PINKBEANINNEREYE,
+		GEO_PINKBEANOUTEREYE,
+		GEO_PINKBEANEYEMARK,
 		GEO_PROPELLERBASE,
 		GEO_PROPELLERROD,
 		GEO_PROPELLERBLADES,
@@ -53,6 +58,7 @@ public:
 	virtual void Exit();
 
 	float rotateBlade;
+	float translateModel;
 private:
 	void RenderMesh(Mesh *mesh, bool enableLight);
 

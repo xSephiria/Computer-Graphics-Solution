@@ -73,6 +73,7 @@ void Assignment2::Init()
 	//variable to rotate geometry
 
 	rotateBlade = 0.f;
+	translateModel = 0.f;
 	//Initialize camera settings
 	camera.Init(Vector3(50, 40, 40), Vector3(0, 0, 0), Vector3(0, 1, 0));
 
@@ -107,6 +108,36 @@ void Assignment2::Init()
 	meshList[GEO_PINKBEANLOWERBODY]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
 	meshList[GEO_PINKBEANLOWERBODY]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
 
+	meshList[GE0_PINKBEANINNEREYE] = MeshBuilder::GenerateSphere("innereye", Color(0.941f, 0.973f, 1.000f), 36, 36);
+	meshList[GE0_PINKBEANINNEREYE]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+	meshList[GE0_PINKBEANINNEREYE]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
+	meshList[GE0_PINKBEANINNEREYE]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
+
+	meshList[GEO_PINKBEANOUTEREYE] = MeshBuilder::GenerateSphere("outereye", Color(0.f, 0.f, 0.f), 36, 36);
+	meshList[GEO_PINKBEANOUTEREYE]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PINKBEANOUTEREYE]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
+	meshList[GEO_PINKBEANOUTEREYE]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
+
+	meshList[GEO_PINKBEANEYEMARK] = MeshBuilder::GenerateCube("eyemark", Color(0.941f, 0.973f, 1.000f));
+	meshList[GEO_PINKBEANEYEMARK]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PINKBEANEYEMARK]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
+	meshList[GEO_PINKBEANEYEMARK]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
+
+	meshList[GEO_PINKBEANBELLY] = MeshBuilder::GenerateCylinder("Belly", Color(0.941f, 0.973f, 1.000f), 36);
+	meshList[GEO_PINKBEANBELLY]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PINKBEANBELLY]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
+	meshList[GEO_PINKBEANBELLY]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
+
+	meshList[GEO_PINKBEANARMS] = MeshBuilder::GenerateSphere("Arm", Color(1.000f, 0.078f, 0.576f), 36, 36);
+	meshList[GEO_PINKBEANARMS]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PINKBEANARMS]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
+	meshList[GEO_PINKBEANARMS]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
+
+	meshList[GEO_PINKBEANLEGS] = MeshBuilder::GenerateSphere("Legs", Color(0.863f, 0.078f, 0.235f), 36, 36);
+	meshList[GEO_PINKBEANLEGS]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
+	meshList[GEO_PINKBEANLEGS]->material.kDiffuse.Set(0.3f, 0.3f, 0.3f);
+	meshList[GEO_PINKBEANLEGS]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
+
 	// item
 	meshList[GEO_PROPELLERBASE] = MeshBuilder::GenerateHemiSphere("PropellerBase", Color(1.000f, 0.647f, 0.000f), 36, 36);
 	meshList[GEO_PROPELLERBASE]->material.kAmbient.Set(0.5f, 0.5f, 0.5f);
@@ -129,7 +160,7 @@ void Assignment2::Init()
 	meshList[GEO_PROPELLERBLADES]->material.kSpecular.Set(0.7f, 0.7f, 0.7f);
 
 	Mtx44 projection; 
-	projection.SetToPerspective(45.0f, 4.0f / 3.0f, 0.1f, 1000.0f);
+	projection.SetToPerspective(45.0f, 16.0f / 9.0f, 0.1f, 1000.0f);
 	projectionStack.LoadMatrix(projection);
 }
 
@@ -172,6 +203,7 @@ void Assignment2::Update(double dt)
 	else
 	{
 		rotateBlade += (10 * dt);
+		//translateModel += (10 * dt);
 	}
 }
 
@@ -236,83 +268,132 @@ void Assignment2::Render()
 	RenderMesh(meshList[GEO_QUAD], true);
 	modelStack.PopMatrix();
 	
+	// Whole model
+	modelStack.PushMatrix();
+	//modelStack.Translate(0, translateModel, 0);
 	//Pb
-	modelStack.PushMatrix();
+		modelStack.PushMatrix();
 
-	modelStack.PushMatrix();
-		modelStack.Translate(-4, 12, 0);
-		modelStack.Rotate(45.f, 0, 0, 1);
+		modelStack.PushMatrix();
+			modelStack.Translate(-4, 12, 0);
+			modelStack.Rotate(45.f, 0, 0, 1);
+			RenderMesh(meshList[GEO_PINKBEANEAR], true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+		modelStack.Translate(4, 12, 0);
+		modelStack.Rotate(-45.f, 0, 0, 1);
 		RenderMesh(meshList[GEO_PINKBEANEAR], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-	modelStack.Translate(4, 12, 0);
-	modelStack.Rotate(-45.f, 0, 0, 1);
-	RenderMesh(meshList[GEO_PINKBEANEAR], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-		modelStack.Scale(5.3f, 15, 5.3f);
-		RenderMesh(meshList[GEO_PINKBEANBODY], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-		modelStack.Scale(5.3f, 5.3f, 5.3f);
-		modelStack.Translate(0, 1.4f, 0);
-		modelStack.Rotate(180.f, 1, 0, 0);
-		RenderMesh(meshList[GEO_PINKBEANHEAD], true);
-	modelStack.PopMatrix();
-
-	modelStack.PushMatrix();
-		modelStack.Scale(5.3f, 5.3f, 5.3f);
-		modelStack.Translate(0, -1.4f, 0);
-		modelStack.Rotate(180.f, 1, 0, 0);
-		RenderMesh(meshList[GEO_PINKBEANLOWERBODY], true);
-	modelStack.PopMatrix();
-
-	modelStack.PopMatrix();
-
-	//propeller
-	modelStack.PushMatrix();
-
-		modelStack.Translate(0, 12, 0);
-		modelStack.PushMatrix();
-		modelStack.Scale(1.5, 1.5, 1.5);
-		modelStack.Rotate(180, 0, 0, 1);
-		RenderMesh(meshList[GEO_PROPELLERBASE], true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
-		modelStack.Scale(0.2, 2.5, 0.2);
-		modelStack.Translate(0, 1, 0);
-		RenderMesh(meshList[GEO_PROPELLERROD], true);
+			modelStack.Scale(5.3f, 15, 5.3f);
+			RenderMesh(meshList[GEO_PINKBEANBODY], true);
 		modelStack.PopMatrix();
 
 		modelStack.PushMatrix();
+			modelStack.Scale(5, 12, 5);
+			modelStack.Translate(0, 0, 0.1f);
+			RenderMesh(meshList[GEO_PINKBEANBELLY], true);
+		modelStack.PopMatrix();
 
-		modelStack.Rotate(rotateBlade, 0, 1, 0);
+		modelStack.PushMatrix();
+			modelStack.Translate(-6, 0, 0);
+			modelStack.Rotate(90.f, 0, 0, 1);
+			modelStack.Scale(4, 0.8f, 0.8f);
+			RenderMesh(meshList[GEO_PINKBEANARMS], true);
+		modelStack.PopMatrix();
 
-			modelStack.PushMatrix();
-			modelStack.Scale(0.3, 0.3, 0.3);
-			modelStack.Translate(0, 13, 0);
-			RenderMesh(meshList[GEO_PROPELLERBLADESCONNECTOR], true);
-			modelStack.PopMatrix();
+		modelStack.PushMatrix();
+			modelStack.Translate(6, 0, 0);
+			modelStack.Rotate(90.f, 0, 0, 1);
+			modelStack.Scale(4, 0.8f, 0.8f);
+			RenderMesh(meshList[GEO_PINKBEANARMS], true);
+		modelStack.PopMatrix();
 
-			modelStack.PushMatrix();
-			modelStack.Scale(3, 0.2f, 1);
-			modelStack.Translate(1, 20, 0);
-			RenderMesh(meshList[GEO_PROPELLERBLADES], true);
-			modelStack.PopMatrix();
+		modelStack.PushMatrix();
+			modelStack.Scale(5.3f, 5.3f, 5.3f);
+			modelStack.Translate(0, 1.4f, 0);
+			modelStack.Rotate(180.f, 1, 0, 0);
+			RenderMesh(meshList[GEO_PINKBEANHEAD], true);
+		modelStack.PopMatrix();
 
-			modelStack.PushMatrix();
-			modelStack.Scale(3, 0.2f, 1);
-			modelStack.Translate(-1, 20, 0);
-			RenderMesh(meshList[GEO_PROPELLERBLADES], true);
-			modelStack.PopMatrix();
+		modelStack.PushMatrix();
+		modelStack.Scale(0.5f, 0.5f, 0.1f);
+		modelStack.Translate(-4.f, 20, 40.f);
+		modelStack.Rotate(-45.f, 0, 1, 0);
+		RenderMesh(meshList[GE0_PINKBEANINNEREYE], true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+			modelStack.Scale(5.3f, 5.3f, 5.3f);
+			modelStack.Translate(0, -1.4f, 0);
+			modelStack.Rotate(180.f, 1, 0, 0);
+			RenderMesh(meshList[GEO_PINKBEANLOWERBODY], true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+			modelStack.Translate(3.5, -12, 0);
+			modelStack.Rotate(90.f, 0, 1, 0);
+			modelStack.Rotate(35.f, 1, 0, 0);
+			modelStack.Rotate(30.f, 0, 1, 0);
+			modelStack.Scale(4, 1, 1);
+			RenderMesh(meshList[GEO_PINKBEANLEGS], true);
+		modelStack.PopMatrix();
+
+		modelStack.PushMatrix();
+			modelStack.Translate(-3.5, -12, 0);
+			modelStack.Rotate(90.f, 0, 1, 0);
+			modelStack.Rotate(-35.f, 1, 0, 0);
+			modelStack.Rotate(-30.f, 0, 1, 0);
+			modelStack.Scale(4, 1, 1);
+			RenderMesh(meshList[GEO_PINKBEANLEGS], true);
+		modelStack.PopMatrix();
 
 		modelStack.PopMatrix();
+
+		//propeller
+		modelStack.PushMatrix();
+
+			modelStack.Translate(0, 12, 0);
+			modelStack.PushMatrix();
+			modelStack.Scale(1.5, 1.5, 1.5);
+			modelStack.Rotate(180, 0, 0, 1);
+			RenderMesh(meshList[GEO_PROPELLERBASE], true);
+			modelStack.PopMatrix();
+
+			modelStack.PushMatrix();
+			modelStack.Scale(0.2, 2.5, 0.2);
+			modelStack.Translate(0, 1, 0);
+			RenderMesh(meshList[GEO_PROPELLERROD], true);
+			modelStack.PopMatrix();
+
+			modelStack.PushMatrix();
+
+			modelStack.Rotate(rotateBlade, 0, 1, 0);
+
+				modelStack.PushMatrix();
+				modelStack.Scale(0.3, 0.3, 0.3);
+				modelStack.Translate(0, 13, 0);
+				RenderMesh(meshList[GEO_PROPELLERBLADESCONNECTOR], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				modelStack.Scale(3, 0.2f, 1);
+				modelStack.Translate(1, 20, 0);
+				RenderMesh(meshList[GEO_PROPELLERBLADES], true);
+				modelStack.PopMatrix();
+
+				modelStack.PushMatrix();
+				modelStack.Scale(3, 0.2f, 1);
+				modelStack.Translate(-1, 20, 0);
+				RenderMesh(meshList[GEO_PROPELLERBLADES], true);
+				modelStack.PopMatrix();
+
+			modelStack.PopMatrix();
 	
-	
+		modelStack.PopMatrix();
+
 	modelStack.PopMatrix();
 }
 
